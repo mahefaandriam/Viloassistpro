@@ -12,6 +12,7 @@ const AppointmentCalendar = () => {
   const [client_name, setClientName] = useState<string>('');
   const [client_email, setClientEmail] = useState<string>('');
   const { createAppointment, isLoading } = useAppointments();
+  const [form, setForm] = useState({ name: '', email: '', message: 'Rendez-vous' });
 
   const timeSlots = [
     '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'
@@ -20,31 +21,52 @@ const AppointmentCalendar = () => {
   const handleBooking = async () => {
     if (selectedDate && selectedTime && client_name && client_email) {
       const result = await createAppointment(
-        client_name,    
+        client_name,
         client_email,
         selectedDate,
-        selectedTime 
+        selectedTime
       );
-      
+
       if (result) {
         toast({
-            title: "Rendez-vous envoyé",
-            description: "Vous pouvez maintenant vous connecter",
+          title: "Rendez-vous envoyé",
+          description: "Vous pouvez maintenant vous connecter",
         });
         // Réinitialiser le formulaire
         setClientName('');
         setClientEmail('');
         setSelectedTime('');
         setSelectedDate(new Date());
+
+        try {
+          setForm({
+            ...form,
+            name: client_name,
+            email: client_email
+          });
+          const res = await fetch('/api/hello', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(form),
+          });
+
+          if (res.ok) {
+            //console.log(res.formData);
+          } else {
+            throw new Error();
+          }
+        } catch (err) {
+          //console.log('error: ' + err);
+        }
       }
     }
   };
 
-    const isDateDisabled = (date: Date) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return date < today || date.getDay() === 0 || date.getDay() === 6;
-    };
+  const isDateDisabled = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today || date.getDay() === 0 || date.getDay() === 6;
+  };
 
   // Désactiver les dates passées et le week-end
   // const isDateDisabled = (date: Date) => {
@@ -134,7 +156,7 @@ const AppointmentCalendar = () => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vilo-purple-500 focus:border-transparent dark:bg-gray-700/50 dark:border-gray-600 dark:text-white"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="clientEmail" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Email *
@@ -161,11 +183,10 @@ const AppointmentCalendar = () => {
                       key={time}
                       variant={selectedTime === time ? "default" : "outline"}
                       onClick={() => setSelectedTime(time)}
-                      className={`transition-all duration-200 ${
-                        selectedTime === time 
-                          ? "bg-gradient-to-r from-vilo-purple-600 to-vilo-pink-600 transform scale-105" 
-                          : "hover:scale-105"
-                      }`}
+                      className={`transition-all duration-200 ${selectedTime === time
+                        ? "bg-gradient-to-r from-vilo-purple-600 to-vilo-pink-600 transform scale-105"
+                        : "hover:scale-105"
+                        }`}
                     >
                       {time}
                     </Button>
@@ -188,7 +209,7 @@ const AppointmentCalendar = () => {
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                     <strong>Rendez-vous :</strong> {selectedDate.toLocaleDateString('fr-FR')} à {selectedTime}
                   </p>
-                  <Button 
+                  <Button
                     onClick={handleBooking}
                     disabled={isLoading}
                     className="w-full bg-gradient-to-r from-vilo-purple-600 to-vilo-pink-600 hover:from-vilo-purple-700 hover:to-vilo-pink-700 transform hover:scale-105 transition-all duration-200"

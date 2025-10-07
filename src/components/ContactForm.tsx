@@ -34,7 +34,7 @@ type FormData = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
   const { submitContact, isLoading } = useContacts();
-  
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,9 +53,24 @@ const ContactForm = () => {
       service: data.service,
       message: data.message,
     };
-    
+
     const result = await submitContact(contactData);
     if (result.success) {
+      try {
+        const res = await fetch('/api/hello', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+
+        if (res.ok) {
+          //console.log(res.formData);
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+        //console.log('error: ' + err);
+      }
       form.reset();
     }
   };
@@ -97,7 +112,7 @@ const ContactForm = () => {
                     <FormControl>
                       <Input
                         placeholder="Votre nom complet"
-                        className="border-vilo-purple-200 focus:border-vilo-purple-400 dark:border-vilo-purple-700 h-12" 
+                        className="border-vilo-purple-200 focus:border-vilo-purple-400 dark:border-vilo-purple-700 h-12"
                         {...field}
                       />
                     </FormControl>
@@ -105,7 +120,7 @@ const ContactForm = () => {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="email"
@@ -166,8 +181,8 @@ const ContactForm = () => {
                   <FormControl>
                     <Textarea
                       placeholder="Décrivez vos besoins en détail..."
-                      rows={6} 
-                      className="border-vilo-purple-200 focus:border-vilo-purple-400 dark:border-vilo-purple-700 min-h-[120px] text-base" 
+                      rows={6}
+                      className="border-vilo-purple-200 focus:border-vilo-purple-400 dark:border-vilo-purple-700 min-h-[120px] text-base"
                       {...field}
                     />
                   </FormControl>
@@ -179,7 +194,7 @@ const ContactForm = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-vilo-purple-600 to-vilo-pink-600 hover:from-vilo-purple-700 hover:to-vilo-pink-700 text-white py-4 text-lg mt-4" 
+              className="w-full bg-gradient-to-r from-vilo-purple-600 to-vilo-pink-600 hover:from-vilo-purple-700 hover:to-vilo-pink-700 text-white py-4 text-lg mt-4"
               size="lg"
             >
               {isLoading ? (
