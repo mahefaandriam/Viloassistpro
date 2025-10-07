@@ -141,3 +141,26 @@
     }
   }
 }
+
+/* Customize scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.vilo-purple.600');
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: theme('colors.vilo-purple.600'); /* Tailwind blue-500 */
+  border-radius: 9999px;
+  border: 2px solid #f1f1f1;
+}
+
+/* Optional: for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.vilo-purple.600') #f1f1f1;
+}
