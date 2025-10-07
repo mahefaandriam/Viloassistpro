@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+//import { useNavigate } from 'react-router-dom';
 
 const FAQSection = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+
+  //const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -156,7 +159,10 @@ const FAQSection = () => {
         <div className="text-center mt-12">
           <p className="text-white mb-4">Vous ne trouvez pas la réponse à votre question ?</p>
           <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              window.history.back();
+            }}
             className="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-3 rounded-lg font-medium transition-colors hover:bg-white/30"
           >
             Contactez-nous directement

@@ -64,12 +64,40 @@ const AboutSection = () => {
     }
   ];
 
-  const teamImages = [
+    const teamImages = [
     "/images/img1.jpg",
     "/images/img2.jpg",
     "/images/img3.jpg",
     "/images/img4.jpg",
     "/images/img5.jpg"
+  ];
+
+    const teamMembers = [
+    {
+      name: "Elnida",
+      role: "Rôle du membre",
+      image: "/images/img1.jpg"
+    },
+    {
+      name: "Cynthia",
+      role: "Rôle du membre",
+      image: "/images/img2.jpg"
+    },
+    {
+      name: "Felana",
+      role: "Rôle du membre",
+      image: "/images/img3.jpg"
+    },
+    {
+      name: "Ziona",
+      role: "Rôle du membre",
+      image: "/images/img4.jpg"
+    },
+    {
+      name: "Mana",
+      role: "Rôle du membre",
+      image: "/images/img5.jpg"
+    }
   ];
 
   return (
@@ -122,7 +150,7 @@ const AboutSection = () => {
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="flex -space-x-2">
-                    {teamImages.slice(0, 4).map((img, index) => (
+                    {teamImages.slice(0, 5).map((img, index) => (
                       <img
                         key={index}
                         src={img}
@@ -132,8 +160,9 @@ const AboutSection = () => {
                     ))}
                   </div>
                   <div className="text-sm">
-                    <div className="font-semibold text-gray-900">Notre équipe dédiée</div>
-                    <div className="text-gray-600">+10 professionnels experts</div>
+                    <div className="font-semibold text-gray-900">+10 professionnels experts</div>
+                    {/* <div className="font-semibold text-gray-900">Notre équipe dédiée</div> */}
+                    {/* <div className="text-gray-600">+10 professionnels experts</div> */}
                   </div>
                 </div>
               </div>
@@ -252,56 +281,57 @@ const AboutSection = () => {
 
         {/* Team showcase */}
         <div className={`mb-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-      <div className="text-center mb-12">
-    <h3 className="text-4xl font-bold text-white mb-4">Notre Équipe Dédiée</h3>
-    <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-      Des professionnels passionnés et expérimentés, unis par la même vision : votre réussite.
-    </p>
-  </div>
-
-  {/* Conteneur élargi avec largeur maximale augmentée */}
-  <div className="relative mx-auto p-8 max-w-7xl bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700 shadow-2xl overflow-x-auto">
-    {/* Effet de texture murale */}
-    <div className="absolute inset-0 rounded-2xl overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')] opacity-10"></div>
-    </div>
-        
-    {/* Lignes décoratives (optionnelles) */}
-    <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
-    <div className="absolute top-2/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
-        
-    {/* Conteneur des photos en ligne horizontale */}
-    <div className="relative flex justify-center items-center gap-4 z-10 px-4 min-w-max">
-      {teamImages.map((img, index) => (
-        <div
-          key={index}
-          className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105 flex-shrink-0"
-        >
-          {/* Support mural élégant */}
-          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-6 flex justify-center">
-            <div className="w-8 h-8 bg-gray-700 border-t-2 border-gray-600 rounded-t-full shadow-inner"></div>
+          <div className="text-center mb-12">
+            <h3 className="text-4xl font-bold text-white mb-4">Notre Équipe Dédiée</h3>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Des professionnels passionnés et expérimentés, unis par la même vision : votre réussite.
+            </p>
           </div>
-                    
-          {/* Fil métallique */}
-          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-0.5 h-6 bg-gradient-to-b from-gray-400 to-gray-600"></div>
-                    
-          {/* Photo avec cadre amélioré */}
-          <div className="relative overflow-hidden rounded-xl border-4 border-purple-400/90 shadow-xl bg-gray-900 transition-all duration-300 group-hover:border-purple-300 group-hover:shadow-2xl">
-            <img
-              src={img}
-              alt={`Membre de l'équipe ${index + 1}`}
-              className="w-48 h-60 md:w-56 md:h-72 object-cover transform transition-transform duration-500 group-hover:scale-105"
-            />
-            {/* Overlay au hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-              <span className="text-white font-medium text-lg">Membre {index + 1}</span>
+
+          {/* Conteneur élargi avec largeur maximale augmentée */}
+          <div className="relative mx-auto p-8 max-w-7xl bg-gray-800/50 rounded-2xl backdrop-blur-sm border border-gray-700 shadow-2xl overflow-x-auto">
+            {/* Effet de texture murale */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')] opacity-10"></div>
+            </div>
+                
+            {/* Lignes décoratives (optionnelles) */}
+            <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+            <div className="absolute top-2/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+                
+            {/* Conteneur des photos en ligne horizontale */}
+            <div className="relative flex justify-center items-center gap-4 z-10 px-4 min-w-max">
+              {teamMembers.map((member, index) => (
+                <div
+                  key={index}
+                  className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105 flex-shrink-0"
+                >
+                  {/* Support mural élégant */}
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-6 flex justify-center">
+                    <div className="w-8 h-8 bg-gray-700 border-t-2 border-gray-600 rounded-t-full shadow-inner"></div>
+                  </div>
+                            
+                  {/* Fil métallique */}
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-0.5 h-6 bg-gradient-to-b from-gray-400 to-gray-600"></div>
+                            
+                  {/* Photo avec cadre amélioré */}
+                  <div className="relative overflow-hidden rounded-xl border-4 border-purple-400/90 shadow-xl bg-gray-900 transition-all duration-300 group-hover:border-purple-300 group-hover:shadow-2xl">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-48 h-60 md:w-56 md:h-72 object-cover transform transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Overlay au hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-4">
+                      <span className="text-white font-bold text-lg">{member.name}</span>
+                      {/* {member.role && <span className="text-purple-300 text-sm mt-1">{member.role}</span>} */}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</div>
 
         {/* Values */}
         <div className="space-y-12">

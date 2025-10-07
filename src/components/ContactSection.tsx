@@ -39,7 +39,7 @@ const ContactSection = () => {
       id: 'email',
       icon: Mail,
       title: 'Email Professionnel',
-      info: 'manampisoa.m@zurcher.edu.mg',
+      info: 'info@viloassistpro.com',
       action: 'Nous écrire',
       color: 'from-violet-500 to-purple-500',
       actionColor: 'text-violet-600 hover:text-violet-500',
@@ -196,8 +196,8 @@ const ContactSection = () => {
                     <div>
                       <h4 className="font-bold text-gray-800 mb-2">Horaires</h4>
                       <p className="text-gray-600 text-sm leading-relaxed">
-                        Lun - Ven : 8h - 18h<br />
-                        Sam : 9h - 15h ou sur rendez-vous<br />
+                        Lundi au Vendredi de 9h à 17h<br />
+                        {/* Sam : 9h - 15h ou sur rendez-vous<br /> */}
                         {/* Dim : Sur rendez-vous */}
                       </p>
                     </div>
