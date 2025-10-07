@@ -69,7 +69,7 @@ export default async function handler(req, res) {
   try {
     const result = await resend.emails.send({
       from: 'noreply@viloassistpro.com', // Use a verified domain or resendmail.com
-      to: ['info@viloassistpro.com'],                 // Your email to receive the form
+      to: ['admin@viloassistpro.com'],                 // Your email to receive the form
       subject: `📩 Nouveau message de ${name}`,
       html: htmlContent,
     });
