@@ -8,8 +8,8 @@ export const useContacts = () => {
 
   const submitContact = async (contactData: ContactFormData) => {
     setIsLoading(true);
-    const API_URL = import.meta.env.VITE_EMAIL_API_URL;
-    const CLIENT_KEY = import.meta.env.VITE_CLIENT_KEY;
+   
+
     try {
       // Envoyer les données à votre API Node.js
       const response = await api.post('/contacts', contactData);
@@ -30,30 +30,7 @@ export const useContacts = () => {
         // L'erreur d'email n'est pas bloquante
       }*/
 
-      try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${CLIENT_KEY}`
-          },
-          body: JSON.stringify({
-            to: 'fenoandriams@gmail.com',
-            name: contactData.name,
-            email: contactData.email,
-            subject: contactData.service,
-            message: contactData.message,
-            otherMessage: contactData.otherMessage
-          })
-        });
-
-        if (res.ok) {
-        } else {
-          throw new Error();
-        }
-      } catch (err) {
-
-      }
+      
 
       toast({
         title: "Message envoyé !",

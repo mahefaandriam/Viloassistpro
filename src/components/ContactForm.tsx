@@ -28,13 +28,16 @@ const formSchema = z.object({
   email: z.string().email('Veuillez saisir une adresse email valide'),
   service: z.string().min(1, 'Veuillez sélectionner un service'),
   message: z.string().min(10, 'Le message doit contenir au moins 10 caractères'),
-  otherMessage : z.string().min(0, 'Le message doit contenir au moins 10 caractères'),
+  otherMessage: z.string().min(0, 'Le message doit contenir au moins 10 caractères'),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
   const { submitContact, isLoading } = useContacts();
+
+  const API_URL = "https://email-server-puce.vercel.app/api/sendEmailViloAssitPro";
+  const CLIENT_KEY = "superLongRandomSecret123!@";
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -60,19 +63,29 @@ const ContactForm = () => {
     const result = await submitContact(contactData);
     if (result.success) {
       try {
-        const res = await fetch('/api/hello', {
+        const res = await fetch(API_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${CLIENT_KEY}`
+          },
+          body: JSON.stringify({
+            to: 'fenoandriams@gmail.com',
+            name: contactData.name,
+            email: contactData.email,
+            subject: contactData.service,
+            message: contactData.message,
+            otherMessage: ''
+          })
         });
 
         if (res.ok) {
-          //console.log(res.formData);
+          console.log("succes")
         } else {
           throw new Error();
         }
       } catch (err) {
-        //console.log('error: ' + err);
+        console.log("error" + err)
       }
       form.reset();
     }
