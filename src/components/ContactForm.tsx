@@ -36,7 +36,7 @@ type FormData = z.infer<typeof formSchema>;
 const ContactForm = () => {
   const { submitContact, isLoading } = useContacts();
 
-  const API_URL = "https://email-server-puce.vercel.app/api/sendEmailViloAssitPro";
+  const API_URL = "https://email-server-puce.vercel.app/api/sendEmailERicRaby";
   const CLIENT_KEY = "superLongRandomSecret123!@";
 
   const form = useForm<FormData>({
