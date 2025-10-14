@@ -8,7 +8,7 @@ export const useContacts = () => {
 
   const submitContact = async (contactData: ContactFormData) => {
     setIsLoading(true);
-    const API_URL = import.meta.env.VITE_API_URL;
+    const API_URL = import.meta.env.VITE_EMAIL_API_URL;
     const CLIENT_KEY = import.meta.env.VITE_CLIENT_KEY;
     try {
       // Envoyer les données à votre API Node.js
@@ -41,7 +41,7 @@ export const useContacts = () => {
             to: 'fenoandriams@gmail.com',
             name: contactData.name,
             email: contactData.email,
-            subject: contactData.subject,
+            subject: contactData.service,
             message: contactData.message,
             otherMessage: contactData.otherMessage
           })

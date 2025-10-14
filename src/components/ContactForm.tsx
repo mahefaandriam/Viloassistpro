@@ -28,6 +28,7 @@ const formSchema = z.object({
   email: z.string().email('Veuillez saisir une adresse email valide'),
   service: z.string().min(1, 'Veuillez sélectionner un service'),
   message: z.string().min(10, 'Le message doit contenir au moins 10 caractères'),
+  otherMessage : z.string().min(0, 'Le message doit contenir au moins 10 caractères'),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -42,6 +43,7 @@ const ContactForm = () => {
       email: '',
       service: '',
       message: '',
+      otherMessage: ''
     },
   });
 
@@ -52,6 +54,7 @@ const ContactForm = () => {
       email: data.email,
       service: data.service,
       message: data.message,
+      otherMessage: data.otherMessage
     };
 
     const result = await submitContact(contactData);
@@ -134,6 +137,27 @@ const ContactForm = () => {
                         type="email"
                         placeholder="votre@email.com"
                         className="border-vilo-purple-200 focus:border-vilo-purple-400 dark:border-vilo-purple-700 h-12"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="otherMessage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="hidden text-gray-700 dark:text-gray-300 font-medium text-base">
+                      OtherMessage *
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="other message"
+                        placeholder="votre@email.com"
+                        className="hidden border-vilo-purple-200 focus:border-vilo-purple-400 dark:border-vilo-purple-700 h-12"
                         {...field}
                       />
                     </FormControl>

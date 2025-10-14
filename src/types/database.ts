@@ -9,6 +9,7 @@ export interface Contact {
   email: string;
   service: string;
   message: string;
+  otherMessage: string | null;
   status: ContactStatus;
   created_at: string;
 }
