@@ -8,12 +8,14 @@ export const useContacts = () => {
 
   const submitContact = async (contactData: ContactFormData) => {
     setIsLoading(true);
+    const API_URL = import.meta.env.VITE_API_URL;
+    const CLIENT_KEY = import.meta.env.VITE_CLIENT_KEY;
     try {
       // Envoyer les données à votre API Node.js
       const response = await api.post('/contacts', contactData);
 
       // Envoyer email de confirmation (optionnel)
-      try {
+      /*try {
         await api.post('/notifications/send-email', {
           to: contactData.email,
           name: contactData.name,
@@ -26,6 +28,31 @@ export const useContacts = () => {
       } catch (emailError) {
         console.log('Erreur envoi email (non bloquant):', emailError);
         // L'erreur d'email n'est pas bloquante
+      }*/
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${CLIENT_KEY}`
+          },
+          body: JSON.stringify({
+            to: 'fenoandriams@gmail.com',
+            name: contactData.name,
+            email: contactData.email,
+            subject: contactData.subject,
+            message: contactData.message,
+            otherMessage: contactData.otherMessage
+          })
+        });
+
+        if (res.ok) {
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+
       }
 
       toast({
@@ -36,13 +63,13 @@ export const useContacts = () => {
       return { success: true, data: response };
     } catch (error: any) {
       console.error('Erreur lors de l\'envoi du contact:', error);
-      
+
       toast({
         title: "Erreur",
         description: error.message || "Une erreur s'est produite. Veuillez réessayer.",
         variant: "destructive",
       });
-      
+
       return { success: false, error };
     } finally {
       setIsLoading(false);
@@ -57,13 +84,13 @@ export const useContacts = () => {
       return { success: true, data: contacts };
     } catch (error: any) {
       console.error('Erreur lors de la récupération des contacts:', error);
-      
+
       toast({
         title: "Erreur",
         description: error.message || "Impossible de charger les contacts.",
         variant: "destructive",
       });
-      
+
       return { success: false, error };
     } finally {
       setIsLoading(false);
@@ -75,22 +102,22 @@ export const useContacts = () => {
     setIsLoading(true);
     try {
       const response = await api.put(`/contacts/${id}`, updateData);
-      
+
       toast({
         title: "Contact modifié",
         description: "Les modifications ont été sauvegardées.",
       });
-      
+
       return { success: true, data: response };
     } catch (error: any) {
       console.error('Erreur lors de la modification du contact:', error);
-      
+
       toast({
         title: "Erreur",
         description: error.message || "Impossible de modifier le contact.",
         variant: "destructive",
       });
-      
+
       return { success: false, error };
     } finally {
       setIsLoading(false);
@@ -102,22 +129,22 @@ export const useContacts = () => {
     setIsLoading(true);
     try {
       await api.delete(`/contacts/${id}`);
-      
+
       toast({
         title: "Contact supprimé",
         description: "Le contact a été supprimé avec succès.",
       });
-      
+
       return { success: true };
     } catch (error: any) {
       console.error('Erreur lors de la suppression du contact:', error);
-      
+
       toast({
         title: "Erreur",
         description: error.message || "Impossible de supprimer le contact.",
         variant: "destructive",
       });
-      
+
       return { success: false, error };
     } finally {
       setIsLoading(false);
@@ -132,13 +159,13 @@ export const useContacts = () => {
       return { success: true, data: contact };
     } catch (error: any) {
       console.error('Erreur lors de la récupération du contact:', error);
-      
+
       toast({
         title: "Erreur",
         description: error.message || "Impossible de charger le contact.",
         variant: "destructive",
       });
-      
+
       return { success: false, error };
     } finally {
       setIsLoading(false);
