@@ -114,8 +114,8 @@ const TestimonialsSection = () => {
     ? approvedTestimonials 
     : defaultTestimonials;
     
-  console.log('Témoignages finaux utilisés:', testimonials);
-  console.log(`Source des témoignages: ${approvedTestimonials.length > 0 ? `API (${approvedTestimonials.length} approuvés)` : 'Par défaut'}`);
+  //coloe.log('Témoignages finaux utilisés:', testimonials);
+  //coloe.log(`Source des témoignages: ${approvedTestimonials.length > 0 ? `API (${approvedTestimonials.length} approuvés)` : 'Par défaut'}`);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -138,9 +138,9 @@ const TestimonialsSection = () => {
     if (!testimonialsLoaded) {
       const loadTestimonials = async () => {
         try {
-          console.log('Début du chargement des témoignages...');
+          //coloe.log('Début du chargement des témoignages...');
           const result = await fetchTestimonials();
-          console.log('Résultat fetchTestimonials:', result);
+          //coloe.log('Résultat fetchTestimonials:', result);
           setTestimonialsLoaded(true);
         } catch (error) {
           console.error('Erreur lors du chargement des témoignages:', error);
@@ -152,13 +152,13 @@ const TestimonialsSection = () => {
     }
   }, [testimonialsLoaded]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log("Données reçues:", {
       rawData: apiTestimonials,
       formatted: approvedTestimonials,
       source: approvedTestimonials.length > 0 ? "API" : "Défaut"
     });
-  }, [apiTestimonials]);
+  }, [apiTestimonials]);*/
 
   useEffect(() => {
     // Ne démarrer le carousel que quand on a des témoignages

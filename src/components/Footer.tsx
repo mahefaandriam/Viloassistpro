@@ -18,7 +18,7 @@ const Footer = () => {
 
     try {
       if (navigator.onLine) {
-        console.log('Ouverture de Gmail…');
+        //coloe.log('Ouverture de Gmail…');
         window.open(gmailURL, '_blank');
       } else {
         alert("Veuillez vérifier votre connexion Internet avant d'envoyer un message.");

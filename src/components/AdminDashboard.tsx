@@ -158,7 +158,7 @@ const AdminDashboard = () => {
         }
         
         const delay = Math.pow(2, i) * 1000; // 1s, 2s, 4s
-        console.log(`Tentative ${i + 1} échouée, retry dans ${delay}ms`);
+        //coloe.log(`Tentative ${i + 1} échouée, retry dans ${delay}ms`);
         await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
@@ -191,8 +191,8 @@ const AdminDashboard = () => {
 
       const [contactsResponse, appointmentsResponse] = await retryWithBackoff(fetchWithRetry);
 
-      console.log('Réponse contacts brute:', contactsResponse);
-      console.log('Réponse rendez-vous brute:', appointmentsResponse);
+      //coloe.log('Réponse contacts brute:', contactsResponse);
+      //coloe.log('Réponse rendez-vous brute:', appointmentsResponse);
 
       // Validation que ce sont bien des tableaux
       const validatedContacts = Array.isArray(contactsResponse)
@@ -235,7 +235,7 @@ const AdminDashboard = () => {
       setConfirmedEmails(confirmedEmailsMap);
 
       const duration = Date.now() - startTime;
-      console.log(`Données chargées en ${duration}ms - Contacts: ${validatedContacts.length}, Rendez-vous: ${validatedAppointments.length}, Témoignages: ${testimonials.length}`);
+      //coloe.log(`Données chargées en ${duration}ms - Contacts: ${validatedContacts.length}, Rendez-vous: ${validatedAppointments.length}, Témoignages: ${testimonials.length}`);
 
       if (forceRefresh) {
         toast({
@@ -334,7 +334,7 @@ const AdminDashboard = () => {
         ...(data && { data })
       };
 
-      console.log("Envoi email avec payload:", payload);
+      //coloe.log("Envoi email avec payload:", payload);
 
       // 2. Envoi simplifié
       const response = await api.post('/admin/send-email', payload);

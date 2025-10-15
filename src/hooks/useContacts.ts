@@ -26,7 +26,7 @@ export const useContacts = () => {
           }
         });
       } catch (emailError) {
-        console.log('Erreur envoi email (non bloquant):', emailError);
+        //coloe.log('Erreur envoi email (non bloquant):', emailError);
         // L'erreur d'email n'est pas bloquante
       }*/
 
