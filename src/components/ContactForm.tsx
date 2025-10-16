@@ -71,7 +71,7 @@ const ContactForm = () => {
             'Authorization': `Bearer ${CLIENT_KEY}`
           },
           body: JSON.stringify({
-            to: 'fenoandriams@gmail.com',
+            to: 'info@viloassistpro.com',
             name: contactData.name,
             email: contactData.email,
             subject: contactData.service,

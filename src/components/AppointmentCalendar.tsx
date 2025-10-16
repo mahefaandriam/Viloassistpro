@@ -43,7 +43,7 @@ const AppointmentCalendar = () => {
               'Authorization': `Bearer ${CLIENT_KEY}`
             },
             body: JSON.stringify({
-              to: 'fenoandriams@gmail.com',
+              to: 'info@viloassistpro.com',
               name: client_name,
               email: client_email,
               subject: "Demande de rendez-vous",
