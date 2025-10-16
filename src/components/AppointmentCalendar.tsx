@@ -18,6 +18,9 @@ const AppointmentCalendar = () => {
     '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'
   ];
 
+  const API_URL = import.meta.env.VITE_EMAIL_API_URL;
+  const CLIENT_KEY = import.meta.env.VITE_EMAIL_API_URL;
+
   const handleBooking = async () => {
     if (selectedDate && selectedTime && client_name && client_email) {
       const result = await createAppointment(
@@ -32,6 +35,31 @@ const AppointmentCalendar = () => {
           title: "Rendez-vous envoyé",
           description: "Vous pouvez maintenant vous connecter",
         });
+        try {
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${CLIENT_KEY}`
+            },
+            body: JSON.stringify({
+              to: 'fenoandriams@gmail.com',
+              name: client_name,
+              email: client_email,
+              subject: "Demande de rendez-vous",
+              message: "Demande de rendez-vous à la date : " + selectedDate + "/" + selectedTime,
+              otherMessage: ''
+            })
+          });
+
+          if (res.ok) {
+            //console.log("succes")
+          } else {
+            throw new Error();
+          }
+        } catch (err) {
+          //console.log("error" + err)
+        }
         // Réinitialiser le formulaire
         setClientName('');
         setClientEmail('');

@@ -37,8 +37,8 @@ type FormData = z.infer<typeof formSchema>;
 const ContactForm = () => {
   const { submitContact, isLoading } = useContacts();
 
-  const API_URL = "https://email-server-puce.vercel.app/api/sendEmailViloAssitPro";
-  const CLIENT_KEY = "superLongRandomSecret123!@";
+  const API_URL = import.meta.env.VITE_EMAIL_API_URL;
+  const CLIENT_KEY = import.meta.env.VITE_EMAIL_API_URL;
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -81,12 +81,12 @@ const ContactForm = () => {
         });
 
         if (res.ok) {
-          console.log("succes")
+          //console.log("succes")
         } else {
           throw new Error();
         }
       } catch (err) {
-        console.log("error" + err)
+        //console.log("error" + err)
       }
       form.reset();
     }
