@@ -38,7 +38,7 @@ const ContactForm = () => {
   const { submitContact, isLoading } = useContacts();
 
   const API_URL = import.meta.env.VITE_EMAIL_API_URL;
-  const CLIENT_KEY = import.meta.env.VITE_EMAIL_API_URL;
+  const CLIENT_KEY = import.meta.env.VITE_CLIENT_KEY;
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -76,7 +76,7 @@ const ContactForm = () => {
             email: contactData.email,
             subject: contactData.service,
             message: contactData.message,
-            otherMessage: ''
+            otherMessage: contactData.otherMessage
           })
         });
 

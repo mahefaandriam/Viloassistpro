@@ -19,7 +19,7 @@ const AppointmentCalendar = () => {
   ];
 
   const API_URL = import.meta.env.VITE_EMAIL_API_URL;
-  const CLIENT_KEY = import.meta.env.VITE_EMAIL_API_URL;
+  const CLIENT_KEY = import.meta.env.VITE_CLIENT_KEY;
 
   const handleBooking = async () => {
     if (selectedDate && selectedTime && client_name && client_email) {
